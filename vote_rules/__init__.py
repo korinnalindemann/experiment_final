@@ -330,13 +330,13 @@ class Vote_Red(Page):
 class Instructions1(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return (participant.num_redi == 1 or participant.num_capi == 1)
+        return (participant.num_redi == 5 or participant.num_capi == 5)
 
 class Game(Page):
 
     def is_displayed(player: Player):
         participant = player.participant
-        return (participant.num_capi == 1 or participant.num_redi == 1)
+        return (participant.num_capi == 5 or participant.num_redi == 5)
 
     timeout_seconds = 30
 
@@ -362,7 +362,7 @@ class Game(Page):
 class Results_Round(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return participant.num_capi == 1 or participant.num_redi == 1
+        return participant.num_capi == 5 or participant.num_redi == 5
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -373,14 +373,14 @@ class Results_Round(Page):
 class Results_Cap(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return player.vote_rules == 0 and (participant.num_capi == 1 or participant.num_redi == 1)
+        return player.vote_rules == 0 and (participant.num_capi == 5 or participant.num_redi == 5)
 
 
 
 class Results_Red(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return player.vote_rules == 1 and (participant.num_capi == 1 or participant.num_redi == 1)
+        return player.vote_rules == 1 and (participant.num_capi == 5 or participant.num_redi == 5)
 
 
 
