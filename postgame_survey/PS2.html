@@ -1,0 +1,85 @@
+{{ block styles }}
+  <link href="{{ static 'postgame_survey/styling.css' }}" rel="stylesheet">
+
+<style>
+    .table_spec{
+    width: 8%;
+    text-align: center;
+    border-bottom: 0px
+    }
+
+    .table_spec2{
+    width: 95%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom:20px;
+    margin-top: 20px;
+    }
+</style>
+
+{{ endblock }}
+{{ block content }}
+<p>
+
+Stellen Sie sich vor, Sie hätten bei den Regeln zu der Punkteverteilung der Spiele von Beginn mitbestimmen können:
+    Die Punkte können in der Gruppe entweder <b>nicht umverteilt</b> werden, so daß jeder Spieler seine eigens erzielten Punkte behält oder
+    die Punkte können <b>vollständig umverteilt</b> werden, so daß alle Punkte, die innerhalb einer Gruppe gemacht würden,
+    gleichmäßig zwischen den Spielern verteilt werden.
+
+    </p>
+
+<p>
+Wie stark wären Sie für oder gegen eine Umverteilung der Punkte gewesen,
+    wenn 0 = gegen eine Punkteumverteilung und 10 = für eine Punkteumverteilung bedeutet?
+</p>
+
+<table class="table_spec2">
+    <tr>
+         <td class="table_spec"> gegen Umverteilung</td>
+         <th class="table_spec">  </th>
+     <th class="table_spec">  </th>
+         <th class="table_spec">  </th>
+        <th class="table_spec">  </th>
+         <th class="table_spec">  </th>
+         <th class="table_spec">  </th>
+          <th class="table_spec">  </th>
+        <th class="table_spec">  </th>
+        <th class="table_spec">  </th>
+         <td class = "table_spec"> für Umverteilung </td>
+
+    </tr>
+    <tr>
+
+         <th style="text-align:center"> 0 </th>
+        <th style="text-align:center"> 1 </th>
+        <th style="text-align:center"> 2 </th>
+           <th style="text-align:center"> 3 </th>
+             <th style="text-align:center"> 4 </th>
+            <th style="text-align:center"> 5 </th>
+            <th style="text-align:center"> 6 </th>
+           <th style="text-align:center"> 7 </th>
+             <th style="text-align:center"> 8 </th>
+           <th style="text-align:center"> 9 </th>
+           <th style="text-align:center"> 10 </th>
+
+
+
+     </tr>
+    {{ for field in form }}
+
+        <tr>
+
+            {{ for choice in field }}
+                <td class="table_spec">{{ choice }}</td>
+
+            {{ endfor }}
+
+        </tr>
+    {{ endfor }}
+</table>
+
+
+
+    {{ next_button }}
+
+{{ endblock }}

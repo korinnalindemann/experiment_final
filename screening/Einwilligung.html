@@ -1,0 +1,42 @@
+{{ block styles }}
+<link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block scripts }}
+
+{{ endblock }}
+
+
+{{ block content }}
+<h4 class="text-center mb-4 text-title" id="my_id">
+   Einwilligung
+</h4>
+
+<p>
+    Bevor Sie sich für die Teilnahme an dieser Studie entscheiden, ist es wichtig, daß Sie verstehen, warum die Forschung durchgeführt wird und was sie beinhaltet. Bitte nehmen Sie sich die Zeit, die folgenden Informationen sorgfältig zu lesen. Bitte kontaktieren Sie die Forscher, wenn Sie weitere Informationen benötigen.
+
+
+<h6> Forschungsprojekt </h6>
+<p></p>
+In der Studie geht es darum, mehr über politische Einstellungen und Meinungen von Menschen, die in Deutschland leben, zu erfahren. Ihre Teilnahme ist freiwillig. Sie haben die Möglichkeit, einige oder alle Fragen nicht zu beantworten.
+</p>
+
+<h6>Ablauf der Studie</h6>
+<p>
+In dieser Online-Studie werden Ihnen verschiedene Fragen gestellt. Die meisten können Sie durch das Anklicken von Kästchen beantworten, um Ihre Einstellung und Meinung mitzuteilen. Zusätzlich werden in einem Teil jeweils 45-Sekunden Aufgaben gestellt, die Sie lösen können. Genauere Anleitungen werden folgen. Sie können jederzeit aufhören. Falls es Fragen gibt, die sie lieber nicht beantworten möchten, können Sie bei der nächsten fortfahren.
+</p>
+
+<h6> Nutzen und Risiko</h6>
+<p>
+Die Risiken für die Teilnahme sind minimal, und obwohl es keine direkten Vorteile der Teilnahme gibt, werden Sie dazu beitragen, das wissenschaftliche Verständnis der öffentlichen Meinung und des Verhaltens zu fördern. Das Studienpersonal wird Ihre persönlichen Daten streng schützen, so daß niemand in der Lage sein wird, Ihre Antworten und alle anderen Informationen, die Sie identifizieren, miteinander in Verbindung zu bringen. Alle persönlichen Informationen, die Sie identifizieren könnten, werden entfernt oder geändert, bevor Dateien mit anderen Forschern ausgetauscht oder Ergebnisse veröffentlicht werden.
+
+<h6> Kontakt </h6>
+<p> Fragen zu diesem Projekt können an Korinna Lindemann gerichtet werden (lindemann@hertie-school.org). </p>
+
+<p>
+Hiermit bestätige ich, dass ich mindestens 18 Jahre alt bin, dass ich die oben aufgeführten Bedingungen gelesen und verstanden habe und mit ihnen einverstanden bin. Möchten Sie an dieser Umfrage teilnehmen?</p>
+</p>
+  {{ formfields }}
+    {{ next_button }}
+{{ endblock }}
+
+

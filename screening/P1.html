@@ -1,0 +1,12 @@
+{{ block styles }}
+  <link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<h6> Zum Start möchten wir Ihnen gerne einige Fragen zu Ihrem persönlichen Hintergrund stellen.</h6>
+
+
+    {{ formfields}}
+
+    {{ next_button }}
+
+{{ endblock }}

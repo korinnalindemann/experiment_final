@@ -1,0 +1,12 @@
+{{ block styles }}
+<link href="{{ static 'postgame_survey/styling.css' }}" rel="stylesheet">
+
+
+{{ endblock }}
+<p> Nun würden wir gerne noch einige Fragen mehr zu ihrem persönlichen Hintergrund stellen. </p>
+{{ block content }}
+  {{ formfields}}
+
+    {{ next_button }}
+
+{{ endblock }}

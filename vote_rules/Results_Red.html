@@ -1,0 +1,281 @@
+{{ block styles }}
+<style>
+    .otree-btn-next {
+        display: inherit;
+        visibility: hidden; /* Set visibility property to hidden to hide the Next button */
+        margin: auto;
+        background: lightgray;
+        border: dimgray;
+        color: dimgray;
+        font-family: Helvetica;
+    }
+
+    .text-title {
+        color: black;
+        font-weight: bold;
+        font-family: Helvetica;
+    }
+
+    .text-instructions {
+        color: black;
+        font-family: Helvetica;
+    }
+
+    .text-pos-red {
+        color: green;
+        font-family: Helvetica;
+        font-weight: bold;
+    }
+
+    .text-neg-red {
+        color: red;
+        font-family: Helvetica;
+        font-weight: bold;
+    }
+
+    .col-7 {
+    flex: 0 0 auto;
+    width: 100%;
+    }
+
+
+    @media only screen and (max-width: 458px) {
+
+        .fonttab {
+            width: 100%;
+            font-size: 11px;
+            }
+  }
+      .col-7 {
+    flex: 0 0 auto;
+    width: 100%;
+    }
+
+
+    @media only screen and (max-width: 458px) {
+
+        .fonttab {
+            width: 100%;
+            font-size: 11px;
+
+            }
+        .boxsize{
+
+          margin-top: -20px;
+          }
+  }
+
+    @media only screen and (min-width: 459px) {
+
+        .fonttab {
+            font-size: 14px;
+            }
+
+        .boxsize{
+            width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:-20px
+        }
+  }
+
+
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+<script>
+    // Wait for the DOM to be loaded
+    $(function () {
+        // Select the Next button using the relevant class
+        let $nextButton = $('.otree-btn-next');
+
+        // Set a timeout that will execute a function after N milliseconds
+        setTimeout(
+            // Function to be executed on timeout
+            // This function change a style property of the Next button using the JQuery method css()
+            // The visibility property is set to "visible"
+            function () {
+                $nextButton.css('visibility', 'visible')
+            }, 1000 * 4  // Time in milliseconds before the timeout. Timer starts when the DOM is loaded
+        );
+    })
+</script>
+{{ endblock }}
+
+
+{{ block title }}
+{{ endblock }}
+
+{{ block content }}
+<h6 class="text-center mb-4 text-title" id="my_id">
+    Resultate Spiel 4
+</h6>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col">
+            <div class="card mb-4 border-0 bg-white text-instructions">
+                <div class="card-body bg-white">
+
+
+
+                    <p>
+                      <i>  Sie haben sich vorhin für eine Punkteumverteilung innerhalb der Gruppe entschieden.</i>
+                    </p>
+
+                     {{ if player.score_task < player.score_task_opp1 and player.score_task < player.score_task_opp2 }}
+
+                    <p> <font color="green">Da Ihre Gegenspieler eine höhere Punktzahl als Sie erzielt haben, kriegen Sie {{ player.red_amount }} Punkte mehr!</font> </p>
+
+                       {{ else }}
+
+                    <p> <font color="red">Da Ihre Gegenspieler weniger Punkte als Sie erzielt haben, müssen Sie <b>{{ player.red_amount }} Punkte</b> abgeben.</font>
+
+                    </p>
+
+                    {{ endif }}
+
+
+                       <b>
+                           <i>
+                               Sie und Ihre Gegenspieler beenden das vierte Spiel mit <b> {{ player.sum_grou_third }} Punkten</b>.
+                               Ohne die Umverteilung hätten Sie das Spiel mit <b>{{ player.score }} {{ if player.score_task != or player.score_task != -1 } Punkten {{ else }} Punkt {{ endif }}</b> abgeschlossen.
+                               Ihr erster Gegenspieler hätte das Spiel mit  <b>{{ player.score_task_opp1 }} {{ if player.score_task_opp1 != 1 or player.score_task_opp1 != -1 }} Punkten {{ else }} Punkt {{ endif }} </b>
+                               und Ihr zweiter Gegenspieler mit  <b>{{ player.score_task_opp2}} {{ if player.score_task_opp2 != 1 or player.score_task_opp2 != -1 }} Punkten {{ else }} Punkt {{ endif }}</b> beendet.
+                           </i>
+
+                     </p>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-7">
+            <div class="card mb-4 border-3 border-danger bg-white text-instructions boxsize">
+                <div class="card-body bg-white fonttab">
+
+                    <div class="row text-center text-title">
+                        <div>
+                            Punkte in Runde {{ player.round_number }}
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-4">
+
+                        </div>
+                        <div class="col text-center">
+                            Erzielt
+                        </div>
+                        <div class="col text-center">
+                            Umverteilt
+                        </div>
+                        <div class="col text-center">
+                            Endpunkte
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-4">
+                           <b> Sie:</b>
+                        </div>
+                        <div class="col text-center">
+                           <b> {{ player.score_task }} P.</b>
+                        </div>
+
+                        {{ if player.red_amount > 0 }}
+                        <div class="col text-center text-pos-red">
+                            +{{ player.red_amount }} P.
+                        </div>
+                        {{ else }}
+                        {{ if player.red_amount < 0}}
+                        <div class="col text-center text-neg-red">
+                            {{ player.red_amount }} P.
+                        </div>
+                        {{ else }}
+                        <div class="col text-center">
+                           <b> {{ player.red_amount }} P.</b>
+                        </div>
+                        {{ endif }}
+                        {{ endif }}
+
+                        <div class="col text-center">
+                           <b> {{ player.sum_group_third }} P.</b>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            Spieler 1:
+                        </div>
+                        <div class="col text-center">
+                            {{ player.score_task_opp1 }} P.
+                        </div>
+
+                        {{ if player.red_amount_opp1 > 0}}
+                        <div class="col text-center text-pos-red">
+                            +{{ player.red_amount_opp1 }} P.
+                        </div>
+                        {{else }}
+                        {{ if player.red_amount_opp1 < 0}}
+                        <div class="col text-center text-neg-red">
+                            {{ player.red_amount_opp1 }} P.
+                        </div>
+                        {{ else }}
+                        <div class="col text-center">
+                            <b>{{ player.red_amount_opp1 }} P.</b>
+                        </div>
+                        {{ endif }}
+                        {{ endif }}
+
+                        <div class="col text-center">
+                            {{  player.sum_group_third }} P.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            Spieler 2:
+                        </div>
+                        <div class="col text-center">
+                            {{ player.score_task_opp2 }} P.
+                        </div>
+
+                        {{ if player.red_amount_opp2 > 0}}
+                        <div class="col text-center text-pos-red">
+                            +{{ player.red_amount_opp2 }} P.
+                        </div>
+                        {{ else }}
+                        {{ if player.red_amount_opp2 < 0 }}
+                        <div class="col text-center text-neg-red">
+                            {{ player.red_amount_opp2 }} P.
+                        </div>
+                        {{ else }}
+                        <div class="col text-center">
+                            <b>{{ player.red_amount_opp2 }} P.</b>
+                        </div>
+                        {{ endif }}
+                        {{ endif }}
+
+                        <div class="col text-center">
+                            {{  player.sum_group_third  }} P.
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+{{ next_button }}
+
+{{ endblock }}

@@ -1,0 +1,129 @@
+{{ block styles }}
+    <style>
+        .otree-btn-next {
+            display: inherit;
+            visibility: hidden; /* Set visibility property to hidden to hide the Next button */
+            margin: auto;
+            background: lightgray;
+            border: dimgray;
+            color: dimgray;
+            font-family: "Helvetica";
+        }
+        .text-title {
+            color: black;
+            font-weight: bold;
+            font-family: "Helvetica";
+        }
+        .text-instructions{
+            color: black;
+            font-family: "Helvetica";
+        }
+
+    </style>
+{{ endblock }}
+
+{{ block scripts }}
+    <script>
+        // Wait for the DOM to be loaded
+        $(function () {
+            // Select the Next button using the relevant class
+            let $nextButton = $('.otree-btn-next');
+
+            // Set a timeout that will execute a function after N milliseconds
+            setTimeout(
+                // Function to be executed on timeout
+                // This function change a style property of the Next button using the JQuery method css()
+                // The visibility property is set to "visible"
+                function () {
+                    $nextButton.css('visibility', 'visible')
+                }, 1000 * 4  // Time in milliseconds before the timeout. Timer starts when the DOM is loaded
+            );
+        })
+    </script>
+{{ endblock }}
+
+{{ block title }}
+{{ endblock }}
+{{ block content }}
+
+<h6 class="text-center mb-4 text-title" id="my_id">
+    Resultate Runde {{ player.round_number }}
+</h6>
+
+    <div class="bg-white text-instructions">
+        {{ if player.score_task > player.score_task_opp1 and player.score_task > player.score_task_opp2 }}
+
+        {{ if player.score_task > 15 }}
+        <p style="text-align:center"><i>In diesem Spiel haben Sie eine exzellente Punktzahl erreicht. Herzlichen Glückwunsch! </i> &#11088; &#11088; &#11088; </p>
+    <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben weniger Punkte erzielt. </p> -->
+
+        {{ endif }}
+
+
+        {{ if player.score_task > 10 and player.score_task <= 15 }}
+        <p style="text-align:center"><i>In diesem Spiel haben Sie eine sehr gute Punktzahl erreicht. Glückwunsch! </i> &#11088; &#11088;  </p>
+    <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben weniger Punkte erzielt. </i>  </p> -->
+
+        {{ endif }}
+
+        {{ if  player.score_task > 5 and player.score_task <= 10 }}
+        <p style="text-align:center"><i>In diesem Spiel haben Sie eine gute Punktzahl erreicht</i> &#11088; </p>
+    <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben weniger Punkte erzielt.</i>   </p> -->
+
+        {{ endif }}
+
+        {{ if player.score_task <= 5 }}
+
+        <p style="text-align:center"><i>Sie haben in diesem Spiel leider nicht ganz so viele Punkte erreicht. </i>  </p>
+    <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben allerdings weniger Punkte erzielt. </i></p> -->
+
+        {{ endif }}
+
+        {{ endif }}
+
+        {{ if player.score_task < player.score_task_opp1 and player.score_task < player.score_task_opp2 }}
+
+        {{ if player.score_task > 15 }}
+        <p style="text-align:center"><i>In diesem Spiel haben Sie eine exzellente Punktzahl erreicht. Herzlichen Glückwunsch! </i> &#11088; &#11088; &#11088; </p>
+    <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben jedoch noch mehr Punkte erzielt.</i> </p> -->
+
+        {{ endif }}
+
+        {{ if  player.score_task > 5 and player.score_task <= 10}}
+        <p style="text-align:center"><i>In diesem Spiel haben Sie eine gute Punktzahl erreicht</i> &#11088; </p>
+     <!--   <p style="text-align:center"><i>Ihre Gegenspieler haben allerdings mehr Punkte erzielt. </i>  </p> -->
+
+        {{ endif }}
+
+         {{ if player.score_task <= 5}}
+
+        <p style="text-align:center"><i>Sie haben in diesem Spiel leider nicht ganz so viele Punkte erreicht. </i></p>
+     <!--   <p style="text-align:center"><i>Ihre Gegenspieler haben mehr Punkte erzielt. </i> </p> -->
+
+        {{ endif }}
+
+        {{ endif }}
+
+        <p>
+            Sie haben {{ player.num_trials}} Rätsel gelöst, wovon {{ player.num_correct }} korrekt und
+            {{ player.num_failed }} inkorrekt gelöst wurden. Sie haben also <b>{{ player.score_task }} {{ if player.score_task != 1 and player.score_task != -1 }} Punkte{{ else }} Punkt{{ endif }}</b> erzielt.
+            Ihr erster Gegenspieler hat <b>{{ player.score_task_opp1 }}{{ if player.score_task_opp1 != 1 and player.score_task_opp1 != -1 }} Punkte{{ else }} Punkt{{ endif }}</b>
+            und Ihr zweiter Gegenspieler hat <b>{{ player.score_task_opp2 }}{{ if player.score_task_opp2 != 1 and player.score_task_opp2 != -1 }} Punkte{{ else }} Punkt{{ endif }}</b>  erzielt.
+           <!---  Your group members have scored <b>{{ player.score_task_opp1 }}</b> and <b>{{ player.score_task_opp2 }}
+            points</b> in this round.
+
+            leading them to have a total score of <b>{{ player.tot_rscore_opp1 }}</b> and
+            <b>{{ player.tot_rscore_opp2 }} points</b> respectively. --->
+        </p>
+
+
+
+
+    </div>
+
+
+
+
+{{ next_button }}
+
+{{ endblock }}

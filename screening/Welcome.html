@@ -1,0 +1,43 @@
+{{ block styles }}
+<link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block scripts }}
+    <script>
+        // Wait for the DOM to be loaded
+        $(function () {
+            // Select the Next button using the relevant class
+            let $nextButton = $('.otree-btn-next');
+
+            // Set a timeout that will execute a function after N milliseconds
+            setTimeout(
+                // Function to be executed on timeout
+                // This function change a style property of the Next button using the JQuery method css()
+                // The visibility property is set to "visible"
+                function () {
+                    $nextButton.css('visibility', 'visible')
+                }, 1000 * 5  // Time in milliseconds before the timeout. Timer starts when the DOM is loaded
+            );
+        })
+    </script>
+{{ endblock }}
+
+
+{{ block content }}
+<h4 class="text-center mb-4 text-title" id="my_id">
+    Herzlich Willkommen!
+</h4>
+
+<p>
+    Sie sind eingeladen, an einer Studie teilzunehmen, die von Clickworker zusammen mit Forschern der Hertie School, eine der führenden Policy Schools, durchgeführt wird.</p>
+
+<p>
+    Ziel der Studie ist es, mehr über Ihre politischen Einstellungen und Ihr politisches Verhalten zu erfahren. Ihre Teilnahme ist freiwillig. Sie können die Studie zu jedem Zeitpunkt abbrechen. Die Befragung sollte ca. 20 Minuten Zeit in Anspruch nehmen.
+Für Ihre Teilnahme werden Sie von Clickworker vergütet. Übertragen Sie dazu bitte den Code den Ihnen zu Ende der Befragung angezeigt wird in Ihr Clickworker Portal.</p>
+
+<p>
+Wir hoffen, dass Sie gerne teilnehmen möchten!</p>
+
+
+    {{ next_button }}
+{{ endblock }}
+

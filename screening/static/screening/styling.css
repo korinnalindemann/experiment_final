@@ -1,0 +1,32 @@
+.otree-btn-next {
+  display: inherit;
+   visibility: visible; /* Set visibility property to hidden to hide the Next button */
+   margin: auto;
+   background: lightgray;
+   border: dimgray;
+   color: dimgray;
+   font-family: Helvetica;
+   }
+ .text-title {
+   color: black;
+   font-weight: bold;
+   font-family: Helvetica;
+   }
+
+.text-instructions{
+ color: black;
+   font-family: Helvetica;
+     }
+
+
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        width: 100%;
+        font-size: 10px;
+
+}

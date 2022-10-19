@@ -1,0 +1,14 @@
+{{ block styles }}
+ <link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+{{ endblock }}
+{{ block content }}
+<h6> Nun möchten wir Ihnen einige Fragen zu Ihren politischen Einstellungen und Interessen stellen. </h6>
+
+
+
+<p>
+{{ formfields }}
+</p>
+    {{ next_button }}
+
+{{ endblock }}

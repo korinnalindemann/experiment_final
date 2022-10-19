@@ -1,0 +1,56 @@
+{% block styles  %}
+    <link href="{% static 'real_effort.css' %}" rel="stylesheet"/>
+    <style>
+        .text-title {
+            color: black;
+            font-weight: bold;
+            font-family: Helvetica;
+        }
+        .text-instructions{
+            color: black;
+            font-family: Helvetica;
+        }
+
+    </style>
+{% endblock %}
+
+{{ block title }}
+<h6 class="text-center mb-4 text-title" id="my_id">
+    Spiel 4
+</h6>
+{{ endblock }}
+
+{{ block content }}
+
+
+
+<div class="d-flex flex-column align-items-center bg-white text-instructions">
+<h4>
+        Rätsel <span id="iter-txt"></span>
+    </h4>
+    <p>Gelöst: <span id="solved-txt"></span>. Misslungen: <span id="failed-txt"></span>.</p>
+    <img class="captcha m-1" id="captcha-img">
+
+    <div class="input-group m-1">
+        <input type="{{ input_type }}" id="answer-inp" class="form-control"
+               placeholder="{{ placeholder }}"
+               autocorrect="off" autocapitalize="off" spellcheck="false">
+        <button type="button" id="submit-btn" class="btn btn-outline-secondary">Eingabe</button>
+    </div>
+
+    <p class="warn" id="warning-txt"></p>
+
+    {{ if DEBUG }}
+ <!--   <button type="button" id="cheat-btn" class="btn btn-dark">Cheat</button> -->
+    {{ endif }}
+</div>
+<br>
+<!-- {{ include Constants.instructions_template }} -->
+
+{{ endblock }}
+
+{{ block scripts }}
+<script src="{{ static 'real_effort.js' }}"></script>
+{{ if DEBUG }}<script src="{{ static 'real_effort_cheating.js' }}"></script>{{ endif }}
+{{ endblock }}
+

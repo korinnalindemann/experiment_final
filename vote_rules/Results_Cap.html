@@ -1,0 +1,186 @@
+{{ block styles }}
+<style>
+    .otree-btn-next {
+        display: inherit;
+        visibility: hidden; /* Set visibility property to hidden to hide the Next button */
+        margin: auto;
+        background: lightgray;
+        border: dimgray;
+        color: dimgray;
+        font-family: Helvetica;
+    }
+
+    .text-title {
+        color: black;
+        font-weight: bold;
+        font-family: Helvetica;
+    }
+
+    .text-instructions {
+        color: black;
+        font-family: Helvetica;
+    }
+    .col-7 {
+    flex: 0 0 auto;
+    width: 100%;
+    }
+
+    .tabwidth {
+    justify-content: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    @media only screen and (max-width: 600px) {
+    .tabwidthmed {
+       width: 100%;
+
+    }}
+
+
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+<script>
+    // Wait for the DOM to be loaded
+    $(function () {
+        // Select the Next button using the relevant class
+        let $nextButton = $('.otree-btn-next');
+
+        // Set a timeout that will execute a function after N milliseconds
+        setTimeout(
+            // Function to be executed on timeout
+            // This function change a style property of the Next button using the JQuery method css()
+            // The visibility property is set to "visible"
+            function () {
+                $nextButton.css('visibility', 'visible')
+            }, 1000 * 4  // Time in milliseconds before the timeout. Timer starts when the DOM is loaded
+        );
+    })
+</script>
+{{ endblock }}
+
+
+{{ block title }}
+{{ endblock }}
+
+{{ block content }}
+<h6 class="text-center mb-4 text-title" id="my_id">
+    Resultate Spiel 4
+</h6>
+
+<div class="container-fluid ">
+
+    <div class="row">
+
+      <!--  <div class="col"> -->
+            <div class="card mb-4 border-0 bg-white text-instructions">
+                <div class="card-body bg-white">
+
+
+                    <p> <i>Sie haben sich vorhin gegen eine Punkteumverteilung innerhalb der Gruppe entschieden. </i>
+
+                    <p/>
+
+                    <p>
+                        Sie beenden das vierte Spiel mit <b>{{ player.score_task }} {{ if player.score_task == 1 or player.score_task == -1}} Punkt {{ else }} Punkten{{ endif }}</b>. Ihr erster Gegenspieler hat das Spiel mit <b>{{ player.score_task_opp1 }} {{ if player.score_task_opp1 == 1 or player.score_task_opp1 == -1 }}
+                    Punkt {{else }} Punkten{{ endif }} </b>  und Ihr zweiter Gegenspieler mit <b>{{ player.score_task_opp2 }} {{ if player.score_task_opp2 == 1 or player.score_task_opp2 == -1 }}
+                    Punkt {{else }} Punkten {{ endif }}</b> abgeschlossen.
+                    </p>
+
+
+
+                </div>
+            </div>
+    <!--    </div> -->
+
+        <div class="col-7">
+            <div class="card mb-4 border-3 border-danger bg-white text-instructions tabwidth tabwidthmed">
+                <div class="card-body bg-white" >
+
+                    <div class="row text-center text-title">
+                        <div>
+                            Punkte in Spiel 4
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-4 width: 60%">
+
+                        </div>
+                        <div class="col text-center">
+                            Punkte
+                        </div>
+            <!--            <div class="col text-center">
+                            Umverteilt
+                        </div>
+                        <div class="col text-center">
+                            Endpunkte
+                        </div> -->
+                    </div>
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-4 ">
+                           <b> Sie:</b>
+                        </div>
+                        <div class="col text-center">
+                            <b> {{ player.score_task }} P. </b>
+                        </div>
+                  <!--      <div class="col text-center">
+                           <b> {{ player.red_amount }} P.</b>
+                        </div>
+                        <div class="col text-center">
+                            <b>{{ player.score_task }} P. </b>
+                        </div>-->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            Spieler 1:
+                        </div>
+                        <div class="col text-center">
+                            {{ player.score_task_opp1 }} P.
+                        </div>
+                <!--        <div class="col text-center">
+                           <b> {{ player.red_amount_opp1 }} P.</b>
+                        </div>
+                        <div class="col text-center">
+                            {{ player.score_task_opp1 }} P.
+                        </div> -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            Spieler 2:
+                        </div>
+                        <div class="col text-center">
+                            {{ player.score_task_opp2 }} P.
+                        </div>
+                <!--        <div class="col text-center">
+                            <b> {{ player.red_amount_opp2 }} P. </b>
+                        </div>
+                        <div class="col text-center">
+                            {{ player.score_task_opp2}} P.
+                        </div> -->
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+{{ next_button }}
+
+{{ endblock }}

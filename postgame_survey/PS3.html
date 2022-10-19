@@ -1,0 +1,60 @@
+{{ block styles }}
+
+  <link href="{{ static 'postgame_survey/styling.css' }}" rel="stylesheet">
+
+{{ endblock }}
+{{ block content }}
+
+<p> Nun würden wir Ihnen gerne noch einige weitere Fragen stellen.</p>
+<p> Wie sehr stimmen Sie folgenden Aussagen zu (0 = stimme gar nicht zu, 10 = stimme voll und ganz zu)? </p>
+
+
+<table class="table">
+
+     <tr>
+          <th>  </th>
+        <td style="width:5%;text-align: center; vertical-align: bottom;"> Gar nicht </td>
+        <th>  </th>
+        <th>   </th>
+        <th>  </th>
+        <th>  </th>
+        <th>  </th>
+        <th>   </th>
+        <th>  </th>
+        <th>  </th>
+        <th>  </th>
+        <td style="width:5%; text-align:center; vertical-align: bottom;">  Voll zu</td>
+
+    </tr>
+    <tr>
+          <th>  </th>
+        <th style = "text-align:center"> 0 </th>
+        <th style = "text-align:center"> 1  </th>
+        <th style = "text-align:center"> 2 </th>
+        <th style = "text-align:center"> 3 </th>
+        <th style = "text-align:center"> 4 </th>
+        <th style = "text-align:center"> 5  </th>
+        <th style = "text-align:center"> 6 </th>
+        <th style = "text-align:center"> 7 </th>
+        <th style = "text-align:center"> 8 </th>
+        <th style = "text-align:center"> 9 </th>
+        <th style = "text-align:center"> 10 </th>
+
+    </tr>
+    {{ for field in form }}
+
+        <tr>
+            <th style="width:35%;"> {{ field.label }}</th>
+
+            {{ for choice in field }}
+                <td style="text-align:center; vertical-align:middle">{{ choice }}</td>
+
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+</table>
+
+
+    {{ next_button }}
+
+{{ endblock }}

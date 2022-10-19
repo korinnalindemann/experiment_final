@@ -1,0 +1,62 @@
+{{ block styles }}
+   <link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+
+
+<style>
+   .tab_spec{
+    width: 90%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:20px;
+    }
+
+</style>
+{{ endblock }}
+{{ block content }}
+
+
+<p>Wie groß ist Ihr Vertrauen in die folgenden Institutionen in Deutschland, wenn 1 "Gar kein Vertrauen" und 7 "Volles Vertrauen" bedeutet?</p>
+
+<p> </p>
+
+<table class="table tab_spec">
+    <tr>
+        <th style="width:16%"> </th>
+        <td style="width:12%;text-align:center"> Gar kein Vertrauen </td>
+        <th style="width:12%">  </th>
+        <th style="width:12%">  </th>
+        <th style="width:12%">  </th>
+        <th style="width:12%">   </th>
+         <th style="width:12%">   </th>
+         <td style="width:12%;text-align:center"> Volles Vertrauen </td>
+    </tr>
+    <tr>
+
+        <th style="width:16%"> </th>
+        <th style="width:12%;text-align:center"> 1 </th>
+        <th style="width:12%;text-align:center"> 2 </th>
+        <th style="width:12%;text-align:center"> 3 </th>
+        <th style="width:12%;text-align:center"> 4 </th>
+        <th style="width:12%;text-align:center"> 5  </th>
+         <th style="width:12%;text-align:center"> 6  </th>
+         <th style="width:12%;text-align:center"> 7 </th>
+
+
+     </tr>
+    {{ for field in form }}
+
+        <tr>
+            <th style="width:16%;"> {{ field.label }}</th>
+
+            {{ for choice in field }}
+                <td style="text-align:center; vertical-align:middle">{{ choice }}</td>
+
+            {{ endfor }}
+        </tr>
+    {{ endfor }}
+</table>
+
+    {{ next_button }}
+
+{{ endblock }}
+

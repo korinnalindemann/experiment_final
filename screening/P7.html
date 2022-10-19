@@ -1,0 +1,72 @@
+{{ block styles }}
+ <link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+<style>
+    .table_spec{
+    width: 8%;
+    text-align: center;
+    border-bottom: 0px
+    }
+    .table_spec2{
+    width: 95%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom:20px;
+    margin-top: 20px;
+    }
+</style>
+{{ endblock }}
+{{ block content }}
+
+<p>
+{{ form.pollr.label }}
+</p>
+<table class="table_spec2">
+    <tr>
+
+         <td class="table_spec"> links  </td>
+         <th class="table_spec">  </th>
+      <th class="table_spec" > </th>
+   <th class="table_spec"> </th>
+        <th class="table_spec"> </th>
+         <th class="table_spec"> </th>
+     <th class ="table_spec"> </th>
+        <th class="table_spec"> </th>
+         <th class="table_spec"> </th>
+          <th class="table_spec"> </th>
+         <td class="table_spec"> rechts </td>
+
+    </tr>
+    <tr>
+
+         <th class="table_spec"> 0  </th>
+      <th class="table_spec">  1 </th>
+<th class="table_spec">  2 </th>
+<th class="table_spec">  3 </th>
+<th class="table_spec"> 4  </th>
+<th class="table_spec">  5 </th>
+<th class="table_spec"> 6   </th>
+ <th class="table_spec">   7</th>
+<th class="table_spec"> 8  </th>
+<th class="table_spec"> 9  </th>
+<th class="table_spec">  10 </th>
+
+
+
+     </tr>
+    {{ for field in form }}
+
+        <tr>
+
+            {{ for choice in field }}
+                <td class="table_spec">{{ choice }}</td>
+
+            {{ endfor }}
+            <th  class="table_spec">   </th>
+        </tr>
+    {{ endfor }}
+</table>
+
+
+    {{ next_button }}
+
+{{ endblock }}

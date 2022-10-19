@@ -1,0 +1,33 @@
+{{ block styles }}
+
+ <link href="{{ static 'screening/styling.css' }}" rel="stylesheet">
+
+
+{{ endblock }}
+{{ block content }}
+
+
+<p>  Wie stark stimmen Sie dieser Aussage zu? </p>
+
+<h6>
+
+ {{ form.prime1.label }}
+ </h6>
+
+
+
+   <p>         {{ form.prime1}}</p>
+
+
+
+
+
+
+
+
+
+
+    {{ next_button }}
+
+
+{{ endblock }}
