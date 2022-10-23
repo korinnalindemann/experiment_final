@@ -13,9 +13,9 @@ class PlayerBot(Bot):
                         redpref_tax = random.randint(0,10))
         yield PS4, dict(man_check =  random.randint(0,10))
         yield PS5, dict(attcheck1 = random.choice(['Ja', 'Nein', 'Weiß nicht']),
-                        attcheck2 = random.choice(['Beide haben weniger Punkte erzielt als ich',
-               'Jemand hat mehr und jemand hat weniger Punkte erzielt als ich',
-               'Beide haben mehr Punkte erzielt als ich',
+                        attcheck2 = random.choice(['Beide haben weniger Punkte als ich erzielt',
+               'Jemand hat mehr und jemand hat weniger Punkte als ich erzielt',
+               'Beide haben mehr Punkte als ich erzielt',
                'Weiß nicht' ]))
 
         yield PS12, dict(state_edu = random.choice(['Baden-Württemberg','Bayern', 'Berlin', 'Brandenburg', 'Bremen',

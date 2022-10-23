@@ -90,10 +90,10 @@
                     <p>
 
                     </p>
-                    <p> {{ if player.round_number == 1 }} Die Regeln sehen es vor, daß Sie und Ihre Gegenspieler die jeweils erzielten Punkte für sich selbst behalten. {{ endif }}
-                        {{ if player.round_number == 2 }} Die Regeln bleiben dieselben, das heißt, daß Sie Ihre erzielten Punkte für sich selbst behalten. {{ endif }}
+                    <p> {{ if player.round_number == 1 }} Die Regeln sehen es vor, dass Sie und Ihre Gegenspieler die jeweils erzielten Punkte für sich selbst behalten. {{ endif }}
+                        {{ if player.round_number == 2 }} Die Regeln bleiben dieselben, das heißt, dass Sie Ihre erzielten Punkte für sich selbst behalten. {{ endif }}
                         {{ if player.round_number == 3 }} Da die Regeln auch in dieser Spielrunde die gleichen bleiben, behalten Sie auch hier Ihre erzielten Punkte für sich selbst. {{ endif }}
-                        Das bedeutet, daß Sie in diesem Spiel <b>{{ player.score_task }} {{ if player.score_task == 1 or player.score_task == -1}} Punkt {{ else }} Punkte {{ endif }}</b>
+                        Das bedeutet, dass Sie in diesem Spiel <b>{{ player.score_task }} {{ if player.score_task == 1 or player.score_task == -1}} Punkt {{ else }} Punkte {{ endif }}</b>
                         erzielt haben.
                     <p/>
 

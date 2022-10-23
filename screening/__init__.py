@@ -213,7 +213,7 @@ class Player(BasePlayer):
     prime2 = models.StringField(
         blank = True,
         label = 'Berufliche Perspektiven waren im sozialistischen Deutschland beschränkt. Zum Beispiel, auch wenn man sich im Beruf stark anstrengte und engagierte,'
-                ' wurde man meistens nicht besser entlöhnt als diejenigen, die die Extra-Meile nicht gegangen sind.',
+                ' wurde man meistens nicht besser entlohnt als diejenigen, die die Extra-Meile nicht gegangen sind.',
      #   label = 'Vor der Wende hatten Menschen im Osten Deutschlands weniger persönliche und berufliche Zukunftsaussichten als diejenigen im Westen.',
         widget = widgets.RadioSelect,
         choices=['Stimme überhaupt nicht zu', 'Stimme eher nicht zu', 'Stimme eher zu',

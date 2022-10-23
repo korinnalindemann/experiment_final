@@ -12,6 +12,7 @@ class PlayerBot(Bot):
             yield instr
         yield Instructions1
         yield Submission(Game, check_html=False)
+        yield Submission(TimeOut_R, check_html=False)
         yield Results_Round
         if self.player.participant.redistribution == 1:
             yield Results_Red

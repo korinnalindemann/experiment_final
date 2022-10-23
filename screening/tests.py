@@ -23,14 +23,18 @@ class PlayerBot(Bot):
                            state_now = random.choice(['Baden-Württemberg','Bayern', 'Berlin', 'Brandenburg', 'Bremen',
                                                       'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen',
                                                       'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen',
-                                                      'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']))
-            yield P6, dict(pol_int = random.choice(['Überhaupt nicht interessiert', 'Eher nicht interessiert', 'Eher interessiert', 'Sehr interessiert', None]))
-            yield P7, dict(pollr = random.randint(0,10))
-            yield P8, dict(partyid = random.choice(['AfD', 'CDU', 'CSU', 'FDP', 'SPD', 'Bündnis 90/Die Grünen', 'Die Linke', 'andere', 'keine', None]),
-                           partyid_oth = random.choice(['Piraten', 'Tierschutzupartei', None]))
-            yield P9, dict(poltrust_gov = random.randint(1,7),
+                                                      'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']),
+                           born_de = "Ja"),
+            if self.player.born_de == "Ja":
+                yield P6, dict(pol_int = random.choice(['Überhaupt nicht interessiert', 'Eher nicht interessiert', 'Eher interessiert', 'Sehr interessiert', '']))
+                yield P7, dict(pollr = random.randint(0,10))
+                yield P8, dict(partyid = random.choice(['AfD', 'CDU', 'CSU', 'FDP', 'SPD', 'Bündnis 90/Die Grünen', 'Die Linke', 'andere', 'keine', '']),
+                           partyid_oth = random.choice(['Piraten', 'Tierschutzupartei', '']))
+                yield P9, dict(poltrust_gov = random.randint(1,7),
                         poltrust_pol = random.randint(1,7),
                         poltrust_med = random.randint(1,7))
-            if self.player.participant.prime == 1:
-                yield P10, dict(prime1=random.choice(['Stimme überhaupt nicht zu', 'Stimme eher nicht zu', 'Stimme eher zu', 'Stimme voll und ganz zu']))
-                yield P11, dict(prime2=random.choice(['Stimme überhaupt nicht zu', 'Stimme eher nicht zu', 'Stimme eher zu', 'Stimme voll und ganz zu']))
+                if self.player.participant.prime == 1:
+                    yield P10, dict(prime1=random.choice(['Stimme überhaupt nicht zu', 'Stimme eher nicht zu', 'Stimme eher zu', 'Stimme voll und ganz zu']))
+                    yield P11, dict(prime2=random.choice(['Stimme überhaupt nicht zu', 'Stimme eher nicht zu', 'Stimme eher zu', 'Stimme voll und ganz zu']))
+            else:
+                yield SorryFull2

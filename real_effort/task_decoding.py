@@ -10,7 +10,7 @@ DIGITS = tuple('123456')
 WORD_LENGTH = 3
 
 INPUT_TYPE = "text"
-INPUT_HINT = "entschlüsselten Text eingeben"
+INPUT_HINT = "entschlüsselte Buchstaben eingeben"
 
 
 def generate_puzzle_fields():

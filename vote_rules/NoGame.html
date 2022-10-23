@@ -7,20 +7,22 @@
             background: lightgray;
             border: dimgray;
             color: dimgray;
-            font-family: Helvetica;
+            font-family: "Helvetica";
         }
         .text-title {
             color: black;
             font-weight: bold;
-            font-family: Helvetica;
+            font-family: "Helvetica";
         }
         .text-instructions{
             color: black;
-            font-family: Helvetica;
+            font-family: "Helvetica";
         }
+
 
     </style>
 {{ endblock }}
+
 {{ block scripts }}
     <script>
         // Wait for the DOM to be loaded
@@ -35,23 +37,25 @@
                 // The visibility property is set to "visible"
                 function () {
                     $nextButton.css('visibility', 'visible')
-                }, 1000 * 5  // Time in milliseconds before the timeout. Timer starts when the DOM is loaded
+                }, 1000 * 4  // Time in milliseconds before the timeout. Timer starts when the DOM is loaded
             );
         })
     </script>
 {{ endblock }}
 
+{{ block title }}
+{{ endblock }}
 {{ block content }}
 
+<h6 style="text-align:center">
+    Sie wurden leider nicht ausgewählt, nochmals ein Spiel zu spielen.
+</h6>
 
-<p> Potentiell folgt nun ein viertes Spiel, welches ähnlich wie eines der ersten drei Spiele sein wird. </p>
 
-<p> Falls Ihnen dieses Spiel angezeigt wird, wie soll die Punkteverteilung innerhalb Ihrer Gruppe geregelt werden?
-    Sollen die Punkte, die innerhalb Ihrer Gruppe gemacht werden, <b>gleichmäßig verteilt werden, so dass Sie und all Ihre Gegenspieler gleich viele
-    Punkte </b>erhalten oder möchten Sie mit <b>Ihren erzielten Punkten verbleiben</b>?
-</p>
 
-    {{ formfields }}
-    {{ next_button }}
+
+
+
+{{ next_button }}
 
 {{ endblock }}

@@ -11,6 +11,8 @@ SESSION_CONFIGS = [
 ],
          num_demo_participants= 10,
          display_name= 'Study',
+         use_browser_bots=False
+
      ),
 
 #    dict(
@@ -82,6 +84,8 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '6593783526314'
+REST_KEY = ''
+SERVER_URL = 'http://localhost:8000'
 
 
 # generating session configs for all varieties of features

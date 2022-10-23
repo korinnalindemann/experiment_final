@@ -111,9 +111,9 @@
 
 
                     <p>
-                        {{ if player.round_number == 1 }} Die Regeln sehen es vor, daß die Gesamtpunktzahl innerhalb einer Gruppe gleichmäßig verteilt wird.
+                        {{ if player.round_number == 1 }} Die Regeln sehen es vor, dass die Gesamtpunktzahl innerhalb einer Gruppe gleichmäßig verteilt wird.
                         <font color="green">Da Ihre Gegenspieler eine höhere Punktzahl als Sie erzielt haben, kriegen Sie <b>{{ player.red_amount }} Punkte</b> mehr!</font>{{ endif }}
-                           {{ if player.round_number == 2 }} Die Regeln bleiben dieselben, das bedeutet, daß Punkte innerhalb der Gruppe gleichmäßig verteilt werden.
+                           {{ if player.round_number == 2 }} Die Regeln bleiben dieselben, das bedeutet, dass Punkte innerhalb der Gruppe gleichmäßig verteilt werden.
                         <font color="green">Dadurch kriegen Sie in dieser Spielrunde <b>{{ player.red_amount }} Punkte</b> mehr!</font>{{ endif }}
                         {{ if player.round_number == 3 }} Da die Regeln auch in dieser Spielrunde die gleichen bleiben, werden auch hier wieder die Punkte umverteilt.
                         <font color="green">Durch die Umverteilung kriegen Sie in diesem Spiel <b>{{ player.red_amount }} Punkte</b> mehr!</font> {{ endif }}
@@ -128,11 +128,11 @@
 
                         <p>
                      {{ if player.round_number == 1 }}
-                            Die Regeln sehen es vor, daß die Gesamtpunktzahl innerhalb einer Gruppe gleichmäßig verteilt wird.
+                            Die Regeln sehen es vor, dass die Gesamtpunktzahl innerhalb einer Gruppe gleichmäßig verteilt wird.
                         <font color="red">Da Ihre Gegenspieler weniger Punkte als Sie erzielt haben, müssen Sie <b>{{ player.red_amount }} Punkte</b> abgeben.</font>
                             {{ endif }}
                             {{ if player.round_number == 2 }}
-                           Die Regeln bleiben dieselben, das bedeutet, daß Punkte innerhalb der Gruppe gleichmäßig verteilt werden.
+                           Die Regeln bleiben dieselben, das bedeutet, dass Punkte innerhalb der Gruppe gleichmäßig verteilt werden.
                         <font color="red">Dadurch erhalten Sie in dieser Spielrunde <b>{{ player.red_amount }} Punkte</b> weniger.</font>{{ endif }}
 
                               {{ if player.round_number == 3 }} Da die Regeln auch in dieser Spielrunde die gleichen bleiben, werden auch hier wieder die Punkte umverteilt.
@@ -146,9 +146,8 @@
                     {{ if player.round_number == 3 }}
                     <p>
                         <i>Sie und Ihre beiden Gegenspieler beenden die drei Spiele mit <b>  {{ player.sum_group_third_tod }} Punkten</b>.
-                        Ohne die Umverteilung hätten Sie ein insgesamt mit <b>{{ player.score_total }} {{ if player.score_total != 1 and player.score_total != -1}} Punkten{{ else }} Punkt{{ endif }}</b> abgeschlossen. Ihr erster Gegenspieler
-                        hätte die Spiele mit <b>{{ player.tot_rscore_opp1}}</b> und Ihr zweiter Gegenspieler mit <b>{{ player.tot_rscore_opp2}} Punkten</b>
-                        beendet.</i>
+                        Ohne die Umverteilung hätten Sie insgesamt mit <b>{{ player.score_total }} {{ if player.score_total != 1 and player.score_total != -1}} Punkten{{ else }} Punkt{{ endif }}</b> abgeschlossen. Ihr erster Gegenspieler
+                        hätte die Spiele mit <b>{{ player.tot_rscore_opp1}}</b> und Ihr zweiter Gegenspieler mit <b>{{ player.tot_rscore_opp2}} {{ if player.tot_rscore_opp2 == 1 or player.tot_rscore_opp2 == -1 }} Punkt{{ else }} Punkten{{ endif }}</b> beendet.</i>
                      </p>
 
                     {{ else }}

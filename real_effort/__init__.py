@@ -280,17 +280,17 @@ def get_score(player: Player):
     from math import ceil
     if (p.score_task >= 0 and p.score_task <= 1) or (p.score_task <=0 and p.score_task >= -1):
         number_list = [1, 2]
-    if (p.score_task > 1 and p.score_task <= 7) or (p.score_task < -1 and p.score_task >= -7):
-        number_list = [0.5, 0.6, 0.7, 0.8, 0.9]
+    if (p.score_task > 1 and p.score_task <= 6) or (p.score_task < -1 and p.score_task >= -6):
+        number_list = [0.4, 0.5, 0.6]
 
     if (p.score_task > 7 and p.score_task <=9) or (p.score_task < -7 and p.score_task >= -9):
-        number_list = [0.5, 0.6, 0.7]
-
-    if (p.score_task > 9 and p.score_task <=14) or (p.score_task < -9 and p.score_task >= -14):
         number_list = [0.4, 0.5]
 
-    if (p.score_task > 14 or p.score_task < -14):
+    if (p.score_task > 9 and p.score_task <=12) or (p.score_task < -9 and p.score_task >= -12):
         number_list = [0.3, 0.4]
+
+    if (p.score_task > 12 or p.score_task < -12):
+        number_list = [0.2, 0.3]
 
     if participant.better_opp == 1:
         if p.score_task > 0:
@@ -431,6 +431,8 @@ def get_score(player: Player):
 
     print(p.red_amount_tot)
 
+import random
+timeout_r = random.randint(2,4)
 
 ####### PAGES #######################################################################
 
@@ -464,13 +466,14 @@ class Game(Page):
                     input_type=task_module.INPUT_TYPE,
                     placeholder=task_module.INPUT_HINT)
 
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        if not timeout_happened and not player.session.params['max_iterations']:
-            raise RuntimeError("malicious page submission")
+  #  @staticmethod
+  #  def before_next_page(player: Player, timeout_happened):
+  #      if not timeout_happened and not player.session.params['max_iterations']:
+  #          raise RuntimeError("malicious page submission")
 
 
-
+class TimeOut_R(Page):
+    timeout_seconds = timeout_r
 
 
 class Results_Round(Page):
@@ -497,7 +500,7 @@ class Results_Red(Page):
 
 
 
-page_sequence = [instr, Instructions1, Game, Results_Round, Results_Cap, Results_Red]
+page_sequence = [instr, Instructions1, Game, TimeOut_R, Results_Round, Results_Cap, Results_Red]
 
 
 ## See VL 5 for adjusting the templates
