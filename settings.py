@@ -85,7 +85,7 @@ DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '6593783526314'
 REST_KEY = ''
-SERVER_URL = 'http://localhost:8000'
+SERVER_URL = 'https://prefstudy-zsomo.ondigitalocean.app/room/umfrage_s1'
 
 
 # generating session configs for all varieties of features
