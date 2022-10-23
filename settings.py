@@ -11,7 +11,7 @@ SESSION_CONFIGS = [
 ],
          num_demo_participants= 10,
          display_name= 'Study',
-         use_browser_bots=False
+         use_browser_bots=True
 
      ),
 
