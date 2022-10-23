@@ -84,7 +84,6 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '6593783526314'
-REST_KEY = ''
 SERVER_URL = 'https://prefstudy-zsomo.ondigitalocean.app/room/umfrage_s1'
 
 
