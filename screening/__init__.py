@@ -199,7 +199,7 @@ class Player(BasePlayer):
 
     partyid = models.StringField(
         blank = True,
-        label='In Deutschland neigen viele Leute längere Zeit einer bestimmten politischen Partei zu, obwohl sie auch ab und zu eine andere Partei wählen. Wie ist das bei Ihnen: Neigen Sie - ganz allgemein gesprochen – einer bestimmten Partei zu? Und wenn ja, welcher?',
+        label='In Deutschland neigen viele Leute längere Zeit einer bestimmten politischen Partei zu, obwohl sie auch ab und zu eine andere Partei wählen. Wie ist das bei Ihnen: Neigen Sie – ganz allgemein gesprochen – einer bestimmten Partei zu? Und wenn ja, welcher?',
         widget = widgets.RadioSelect,
     )
 
