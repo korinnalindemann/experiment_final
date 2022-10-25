@@ -16,9 +16,7 @@ class Subsession(BaseSubsession):
     pass
 
 def creating_session(subsession):
-    session = subsession.session
-    session.num_participants_finished_sov = 0
-    session.num_participants_finished_yug = 0
+    pass
 
 
 class Group(BaseGroup):
