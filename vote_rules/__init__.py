@@ -261,13 +261,14 @@ def get_score(player: Player):
         perfopp = [0.4, 0.5, 0.6]
 
     if (p.score_task >= 7 and p.score_task <=9) or (p.score_task <= -7 and p.score_task >= -9):
-        perfopp = [0.4, 0.5]
+        perfopp = [0.3, 0.4, 0.5]
 
     if (p.score_task >=10 and p.score_task <=12) or (p.score_task <= -10 and p.score_task >= -12):
-        perfopp = [0.3, 0.4]
+        perfopp = [0.2, 0.3, 0.4]
 
     if (p.score_task >= 13 or p.score_task <= -13):
-        perfopp = [0.2, 0.3]
+        perfopp = [0.1, 0.2, 0.3]
+
 
     if participant.better_opp == 1:
         if p.score_task > 0:
