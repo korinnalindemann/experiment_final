@@ -248,7 +248,7 @@ def play_game(player: Player, message: dict):
 def get_score(player: Player):
     participant = player.participant
     p = player
-
+    perfopp = []
     ## generate opponent values (initialise random seed so doesnt change when refreshing page)
     import random
     random.seed(random.randrange(1,1000))
@@ -288,12 +288,12 @@ def get_score(player: Player):
             p.score_task_opp2 = ceil(p.score_task - (p.score_task * (random.choice(perfopp))))
 
         elif p.score_task < 0:
-            p.score_task_opp1 = ceil(p.score_task - (-p.score_task * (random.choice(number_list))))
-            p.score_task_opp2 = ceil(p.score_task - (-p.score_task * (random.choice(number_list))))
+            p.score_task_opp1 = ceil(p.score_task - (-p.score_task * (random.choice(perfopp))))
+            p.score_task_opp2 = ceil(p.score_task - (-p.score_task * (random.choice(perfopp))))
 
         elif p.score_task == 0:
-            p.score_task_opp1 = ceil(p.score_task - random.choice(number_list))
-            p.score_task_opp2 = ceil(p.score_task - random.choice(number_list))
+            p.score_task_opp1 = ceil(p.score_task - random.choice(perfopp))
+            p.score_task_opp2 = ceil(p.score_task - random.choice(perfopp))
 
     print(perfopp)
 
