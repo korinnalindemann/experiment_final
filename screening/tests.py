@@ -24,7 +24,8 @@ class PlayerBot(Bot):
                                                       'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen',
                                                       'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen',
                                                       'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']),
-                           born_de = "Ja"),
+                           born_de = "Ja",
+                           born_de_par = "Ja"),
             if self.player.born_de == "Ja":
                 yield P6, dict(pol_int = random.choice(['Überhaupt nicht interessiert', 'Eher nicht interessiert', 'Eher interessiert', 'Sehr interessiert', '']))
                 yield P7, dict(pollr = random.randint(0,10))

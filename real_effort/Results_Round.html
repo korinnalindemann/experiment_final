@@ -51,7 +51,6 @@
 </h6>
 
     <div class="bg-white text-instructions">
-        {{ if player.score_task > player.score_task_opp1 and player.score_task > player.score_task_opp2 }}
 
         {{ if player.score_task > 15 }}
         <p style="text-align:center"><i>In diesem Spiel haben Sie eine exzellente Punktzahl erreicht. Herzlichen Glückwunsch! </i> &#11088; &#11088; &#11088; </p>
@@ -67,7 +66,7 @@
         {{ endif }}
 
         {{ if  player.score_task > 5 and player.score_task <= 10 }}
-        <p style="text-align:center"><i>In diesem Spiel haben Sie eine gute Punktzahl erreicht</i> &#11088; </p>
+        <p style="text-align:center"><i>In diesem Spiel haben Sie eine gute Punktzahl erreicht. </i> &#11088; </p>
     <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben weniger Punkte erzielt.</i>   </p> -->
 
         {{ endif }}
@@ -79,30 +78,6 @@
 
         {{ endif }}
 
-        {{ endif }}
-
-        {{ if player.score_task < player.score_task_opp1 and player.score_task < player.score_task_opp2 }}
-
-        {{ if player.score_task > 15 }}
-        <p style="text-align:center"><i>In diesem Spiel haben Sie eine exzellente Punktzahl erreicht. Herzlichen Glückwunsch! </i> &#11088; &#11088; &#11088; </p>
-    <!--    <p style="text-align:center"><i>Ihre Gegenspieler haben jedoch noch mehr Punkte erzielt.</i> </p> -->
-
-        {{ endif }}
-
-        {{ if  player.score_task > 5 and player.score_task <= 10}}
-        <p style="text-align:center"><i>In diesem Spiel haben Sie eine gute Punktzahl erreicht</i> &#11088; </p>
-     <!--   <p style="text-align:center"><i>Ihre Gegenspieler haben allerdings mehr Punkte erzielt. </i>  </p> -->
-
-        {{ endif }}
-
-         {{ if player.score_task <= 5}}
-
-        <p style="text-align:center"><i>Sie haben in diesem Spiel leider nicht ganz so viele Punkte erreicht. </i></p>
-     <!--   <p style="text-align:center"><i>Ihre Gegenspieler haben mehr Punkte erzielt. </i> </p> -->
-
-        {{ endif }}
-
-        {{ endif }}
 
         <p>
             Sie haben {{ player.num_trials}} Rätsel gelöst, wovon {{ player.num_correct }} korrekt und
@@ -115,8 +90,6 @@
             leading them to have a total score of <b>{{ player.tot_rscore_opp1 }}</b> and
             <b>{{ player.tot_rscore_opp2 }} points</b> respectively. --->
         </p>
-
-
 
 
     </div>

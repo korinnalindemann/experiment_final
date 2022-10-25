@@ -176,6 +176,12 @@ class Player(BasePlayer):
         choices = ['Ja', 'Nein'],
         widget =  widgets.RadioSelect
     )
+    born_de_par = models.StringField(
+        label = 'Sind beide Ihrer Eltern in Deutschland geboren?',
+        choices = ['Ja', 'Nein'],
+        widget =  widgets.RadioSelect
+    )
+
 
 
     pol_int = models.StringField(
@@ -273,6 +279,7 @@ class P1(Page):
                    'yob',
                    'edu',
                    'born_de',
+                   'born_de_par',
                    'state_now']
 
 
@@ -286,7 +293,7 @@ class P1(Page):
 class SorryFull2(Page):
 
     def is_displayed(player: Player):
-        return  player.born_de == 'Nein'
+        return player.born_de == 'Nein' or player.born_de_par == 'Nein'
 
 class P6(Page):
     form_model = 'player'

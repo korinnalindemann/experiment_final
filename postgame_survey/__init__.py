@@ -84,6 +84,8 @@ class Player(BasePlayer):
     redpref_tax = make_field_11('Steuern sollten erhöht werden, um Einkommensunterschiede zu vermindern.')
     man_check = make_field_11('Wie fair fanden Sie die Spiele (0 = gar nicht fair, '
                                   '10 = sehr fair)?')
+    man_check2 = make_field_11('Wie vorteilhaft empfinden Sie Systeme mit hoher Umverteilung (0 = gar nicht vorteilhaft, '
+                               '10 = sehr vorteilhaft)?')
     attcheck1 = models.StringField(
         blank = True,
         label = 'Wurden in Ihrer Gruppe die Punkte in den <b>ersten drei Spielen</b> zwischen Ihnen und Ihren Gegenspielern umverteilt?',
@@ -92,7 +94,7 @@ class Player(BasePlayer):
     )
     attcheck2 = models.StringField(
         blank = True,
-        label = 'Wie haben Ihre Gegenspieler gespielt?',
+        label = 'Wie haben Ihre Gegenspieler in den <b>ersten drei Spielen</b> insgesamt abgeschlossen?',
         widget = widgets.RadioSelect
     )
 
@@ -187,7 +189,8 @@ class PS3(Page):
 
 class PS4(Page):
     form_model = 'player'
-    form_fields = ['man_check']
+    form_fields = ['man_check',
+                   'man_check2']
 
 class PS5(Page):
     form_model = 'player'
