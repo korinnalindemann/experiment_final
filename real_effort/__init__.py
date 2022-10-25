@@ -267,6 +267,7 @@ def gen_seed(player):
 def get_score(player: Player):
     participant = player.participant
     p = player
+    perfopp = []
     ## generate opponent values (different seeds per subsession so not always the same numbers)
     import random
     if p.round_number == 1:
@@ -279,44 +280,46 @@ def get_score(player: Player):
     print(p.score_task)
     from math import ceil
     if (p.score_task >= 0 and p.score_task <= 1) or (p.score_task <=0 and p.score_task >= -1):
-        number_list = [1, 2]
-    if (p.score_task > 1 and p.score_task <= 6) or (p.score_task < -1 and p.score_task >= -6):
-        number_list = [0.4, 0.5, 0.6]
+        perfopp = [1.0, 2.0]
+    if (p.score_task >= 2 and p.score_task <= 6) or (p.score_task <= -2 and p.score_task >= -6):
+        perfopp = [0.4, 0.5, 0.6]
 
-    if (p.score_task > 7 and p.score_task <=9) or (p.score_task < -7 and p.score_task >= -9):
-        number_list = [0.4, 0.5]
+    if (p.score_task >= 7 and p.score_task <=9) or (p.score_task <= -7 and p.score_task >= -9):
+        perfopp = [0.4, 0.5]
 
-    if (p.score_task > 9 and p.score_task <=12) or (p.score_task < -9 and p.score_task >= -12):
-        number_list = [0.3, 0.4]
+    if (p.score_task >=10 and p.score_task <=12) or (p.score_task <= -10 and p.score_task >= -12):
+        perfopp = [0.3, 0.4]
 
-    if (p.score_task > 12 or p.score_task < -12):
-        number_list = [0.2, 0.3]
+    if (p.score_task >= 13 or p.score_task <= -13):
+        perfopp = [0.2, 0.3]
+
+    print(perfopp)
 
     if participant.better_opp == 1:
         if p.score_task > 0:
-            p.score_task_opp1 = ceil(p.score_task + (p.score_task* (random.choice(number_list))))
-            p.score_task_opp2 = ceil(p.score_task + (p.score_task* (random.choice(number_list))))
+            p.score_task_opp1 = ceil(p.score_task + (p.score_task* (random.choice(perfopp))))
+            p.score_task_opp2 = ceil(p.score_task + (p.score_task* (random.choice(perfopp))))
 
         elif p.score_task < 0:
-            p.score_task_opp1 = ceil(p.score_task + (-p.score_task * (random.choice(number_list))))
-            p.score_task_opp2 = ceil(p.score_task + (-p.score_task * (random.choice(number_list))))
+            p.score_task_opp1 = ceil(p.score_task + (-p.score_task * (random.choice(perfopp))))
+            p.score_task_opp2 = ceil(p.score_task + (-p.score_task * (random.choice(perfopp))))
 
         elif p.score_task == 0:
-            p.score_task_opp1 = ceil(p.score_task + random.choice(number_list))
-            p.score_task_opp2 = ceil(p.score_task + random.choice(number_list))
+            p.score_task_opp1 = ceil(p.score_task + random.choice(perfopp))
+            p.score_task_opp2 = ceil(p.score_task + random.choice(perfopp))
 
     elif participant.better_opp == 0:
         if p.score_task > 0:
-            p.score_task_opp1 = ceil(p.score_task - (p.score_task * (random.choice(number_list))))
-            p.score_task_opp2 = ceil(p.score_task - (p.score_task * (random.choice(number_list))))
+            p.score_task_opp1 = ceil(p.score_task - (p.score_task * (random.choice(perfopp))))
+            p.score_task_opp2 = ceil(p.score_task - (p.score_task * (random.choice(perfopp))))
 
         elif p.score_task < 0:
-            p.score_task_opp1 = ceil(p.score_task - (-p.score_task * (random.choice(number_list))))
-            p.score_task_opp2 = ceil(p.score_task - (-p.score_task * (random.choice(number_list))))
+            p.score_task_opp1 = ceil(p.score_task - (-p.score_task * (random.choice(perfopp))))
+            p.score_task_opp2 = ceil(p.score_task - (-p.score_task * (random.choice(perfopp))))
 
         elif p.score_task == 0:
-            p.score_task_opp1 = ceil(p.score_task - random.choice(number_list))
-            p.score_task_opp2 = ceil(p.score_task - random.choice(number_list))
+            p.score_task_opp1 = ceil(p.score_task - random.choice(perfopp))
+            p.score_task_opp2 = ceil(p.score_task - random.choice(perfopp))
 
 
     p.sum_group = p.score_task + p.score_task_opp1 + p.score_task_opp2
