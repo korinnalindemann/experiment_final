@@ -353,10 +353,10 @@ class Game(Page):
                     input_type=task_module.INPUT_TYPE,
                     placeholder=task_module.INPUT_HINT)
 
-  #  @staticmethod
-  #  def before_next_page(player: Player, timeout_happened):
-  #      if not timeout_happened and not player.session.params['max_iterations']:
-  #          raise RuntimeError("malicious page submission")
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        if not timeout_happened and not player.session.params['max_iterations']:
+            raise RuntimeError("malicious page submission")
 
 
 class Results_Round(Page):

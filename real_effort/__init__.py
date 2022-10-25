@@ -466,10 +466,10 @@ class Game(Page):
                     input_type=task_module.INPUT_TYPE,
                     placeholder=task_module.INPUT_HINT)
 
-  #  @staticmethod
-  #  def before_next_page(player: Player, timeout_happened):
-  #      if not timeout_happened and not player.session.params['max_iterations']:
-  #          raise RuntimeError("malicious page submission")
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        if not timeout_happened and not player.session.params['max_iterations']:
+            raise RuntimeError("malicious page submission")
 
 
 class TimeOut_R(Page):
@@ -503,4 +503,3 @@ class Results_Red(Page):
 page_sequence = [instr, Instructions1, Game, TimeOut_R, Results_Round, Results_Cap, Results_Red]
 
 
-## See VL 5 for adjusting the templates
