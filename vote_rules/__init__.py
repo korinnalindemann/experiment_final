@@ -376,7 +376,7 @@ class Results_Cap(Page):
         participant = player.participant
         vote_rules = player.field_maybe_none('vote_rules')
         if vote_rules is None:
-            return participant.redistribution == 0
+            return participant.redistribution == 0 and (participant.num_capi == 1 or participant.num_redi == 1)
         else:
             return vote_rules == 0 and (participant.num_capi == 1 or participant.num_redi == 1)
 
@@ -387,7 +387,7 @@ class Results_Red(Page):
         participant = player.participant
         vote_rules = player.field_maybe_none('vote_rules')
         if vote_rules is None:
-            return participant.redistribution == 1
+            return participant.redistribution == 1 and (participant.num_capi == 1 or participant.num_redi == 1)
         else:
             return vote_rules == 1 and (participant.num_capi == 1 or participant.num_redi == 1)
 
