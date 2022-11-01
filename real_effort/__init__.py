@@ -74,6 +74,7 @@ class Player(BasePlayer):
     sum_group = models.IntegerField(initial=0)
     sum_group_third = models.FloatField(initial=0)
     seed_cust = models.IntegerField
+    seed_cust2 = models.IntegerField
     red_amount = models.FloatField(initial=0)
     red_amount_opp1 = models.FloatField(initial=0)
     red_amount_opp2 = models.FloatField(initial=0)
@@ -81,7 +82,6 @@ class Player(BasePlayer):
     red_amount_tot_opp1 = models.FloatField(initial=0)
     red_amount_tot_opp2 = models.FloatField(initial=0)
     sum_group_third_tod= models.FloatField(initial=0)
-    diff_red = models.FloatField(initial =0)
 
 
 
@@ -260,8 +260,9 @@ def gen_seed(player):
     import random
     p = player
     p.seed_cust = random.randrange(1,1000)
-    print(p.seed_cust)
+    p.seed_cust2 = random.randrange(1,1000)
     return p.seed_cust
+
 
 # score calculation of results #######
 def get_score(player: Player):
@@ -269,13 +270,7 @@ def get_score(player: Player):
     p = player
     perfopp = []
     ## generate opponent values (different seeds per subsession so not always the same numbers)
-    import random
-    if p.round_number == 1:
-        random.seed(p.seed_cust)
-    elif p.round_number == 2:
-        random.seed(p.seed_cust)
-    else:
-        random.seed(p.seed_cust)
+
     p.score_task = p.num_correct - p.num_failed
     print(p.score_task)
     from math import ceil
@@ -294,90 +289,42 @@ def get_score(player: Player):
         perfopp = [0.1, 0.2, 0.3]
 
     print(perfopp)
-
+    import random
+    score1 = random.choice(perfopp)
+    print('Score1', score1)
+    score2 = random.choice(perfopp)
+    print('Score2', score2)
     if participant.better_opp == 1:
         if p.score_task > 0:
-            p.score_task_opp1 = ceil(p.score_task + (p.score_task* (random.choice(perfopp))))
-            p.score_task_opp2 = ceil(p.score_task + (p.score_task* (random.choice(perfopp))))
+            p.score_task_opp1 = ceil(p.score_task + (p.score_task* score1))
+            p.score_task_opp2 = ceil(p.score_task + (p.score_task* score2))
 
         elif p.score_task < 0:
-            p.score_task_opp1 = ceil(p.score_task + (-p.score_task * (random.choice(perfopp))))
-            p.score_task_opp2 = ceil(p.score_task + (-p.score_task * (random.choice(perfopp))))
+            p.score_task_opp1 = ceil(p.score_task + (-p.score_task * score1))
+            p.score_task_opp2 = ceil(p.score_task + (-p.score_task * score2))
 
         elif p.score_task == 0:
-            p.score_task_opp1 = ceil(p.score_task + random.choice(perfopp))
-            p.score_task_opp2 = ceil(p.score_task + random.choice(perfopp))
+            p.score_task_opp1 = ceil(p.score_task + score1)
+            p.score_task_opp2 = ceil(p.score_task + score2)
 
     elif participant.better_opp == 0:
         if p.score_task > 0:
-            p.score_task_opp1 = ceil(p.score_task - (p.score_task * (random.choice(perfopp))))
-            p.score_task_opp2 = ceil(p.score_task - (p.score_task * (random.choice(perfopp))))
+            p.score_task_opp1 = ceil(p.score_task - (p.score_task * score1))
+            p.score_task_opp2 = ceil(p.score_task - (p.score_task * score2))
 
         elif p.score_task < 0:
-            p.score_task_opp1 = ceil(p.score_task - (-p.score_task * (random.choice(perfopp))))
-            p.score_task_opp2 = ceil(p.score_task - (-p.score_task * (random.choice(perfopp))))
+            p.score_task_opp1 = ceil(p.score_task - (-p.score_task * score1))
+            p.score_task_opp2 = ceil(p.score_task - (-p.score_task * score2))
 
         elif p.score_task == 0:
-            p.score_task_opp1 = ceil(p.score_task - random.choice(perfopp))
-            p.score_task_opp2 = ceil(p.score_task - random.choice(perfopp))
+            p.score_task_opp1 = ceil(p.score_task - score1)
+            p.score_task_opp2 = ceil(p.score_task - score2)
 
 
     p.sum_group = p.score_task + p.score_task_opp1 + p.score_task_opp2
     p.sum_group_third = round((p.sum_group / 3),1)
 
 
-
-
- #   if p.score_task < 0:
- #       if participant.better_opp == 1:
- #           p.sum_group = int((p.score_task + (p.score_task * (-participant.diff_player_opp)))*3)
- #       else:
- #           p.sum_group = int((p.score_task - (p.score_task * (-participant.diff_player_opp)))*3)
-
-
-
-
-
- #   if p.score_task == 0:
- #       if participant.better_opp == 1:
- #           p.sum_group = int(participant.diff_player_opp*10)
- #       else:
- #           p.sum_group = (int(participant.diff_player_opp*10)*(-1))
- #   print(p.sum_group)
-
-#    p.max_opp1 = int(p.sum_group - (3 * p.score_task))
-#    print('Maximum for opp. bett is', p.max_opp1)
-    # ranges min-max for better opp:
-#    p.max_opp1_bet = p.score_task + p.max_opp1 - 1
-#    p.min_opp1_bet = p.score_task + 1
-
-    # ranges min-max for worse opp:
-#    p.max_opp1_worse = p.score_task - 1
-#    p.min_opp1_worse = p.score_task + p.max_opp1 + 1
-#    print('Minimum for opp. worse is', p.min_opp1_worse)
-
- #   ## generate opponent values (different seeds per subsession so not always the same numbers)
- #   import random
- #   if p.round_number == 1:
-#        random.seed(10)
- #   elif p.round_number == 2:
- #       random.seed(11)
- #   else:
- #       random.seed(12)
-  #  if participant.better_opp == 1:
-        # maximum is a function that the max is the difference between the group sum and 3 * the players score - 1,
-        # so that group member 1 and group member 2 are both better than the player
-  #      if p.max_opp1_bet > p.min_opp1_bet:
-  #          p.score_task_opp1 = random.randint(p.min_opp1_bet, p.max_opp1_bet)
-#        else:
-#            p.score_task_opp1 = random.randint(p.score_task + 1, p.score_task + 2)
-#        print(p.score_task_opp1)
-#    if participant.better_opp == 0:
-#        if p.min_opp1_worse > p.max_opp1_worse:
-#            p.score_task_opp1 = random.randint(p.max_opp1_worse, p.min_opp1_worse)
-#        else:
-#            p.score_task_opp1 = random.randint(p.score_task - 2, p.score_task - 1)
-#    p.score_task_opp2 = int(p.sum_group - p.score_task - p.score_task_opp1)
      # calculate total score of player and opponents / group members
 
     if p.round_number == 1:
@@ -389,10 +336,6 @@ def get_score(player: Player):
         p.score_total = prev_player.score_total + p.score_task
         p.tot_rscore_opp1 = prev_player.tot_rscore_opp1 + p.score_task_opp1
         p.tot_rscore_opp2 = prev_player.tot_rscore_opp2 + p.score_task_opp2
-        from statistics import mean
-
-
-
 
     ## redistribution variables
     if participant.redistribution == 1:
@@ -419,20 +362,8 @@ def get_score(player: Player):
         p.red_amount_tot_opp2 = round(prev_player.red_amount_tot_opp2 + p.red_amount_opp2,1)
         p.sum_group_third_tod = round(prev_player.sum_group_third_tod + p.sum_group_third, 1)
     print(p.sum_group_third_tod)
-    # doesn't work if 0.
-    if p.score_task != 0 and (p.score_task < p.sum_group_third):
-        p.diff_red = (p.sum_group_third_tod / p.score_total) - 1
-
-    elif p.score_task != 0 and (p.score_task > p.sum_group_third):
-        p.diff_red = (p.sum_group_third_tod / p.score_total)
-    else:
-        p.diff_red = p.sum_group_third_tod
-    print('Percentage Diff. tot in', p.round_number, p.diff_red)
 
 
-
-
-    print(p.red_amount_tot)
 
 import random
 timeout_r = random.randint(2,4)
@@ -446,6 +377,7 @@ class instr(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         gen_seed(player)
+        print(player.seed_cust, player.seed_cust2)
 
 
 
@@ -478,12 +410,15 @@ class Game(Page):
 class TimeOut_R(Page):
     timeout_seconds = timeout_r
 
-
-class Results_Round(Page):
     @staticmethod
-    def vars_for_template(player: Player):
+    def before_next_page(player: Player, timeout_happened):
         get_score(player)
         return dict()
+
+
+class Results_Round(Page):
+    pass
+
 
 
 

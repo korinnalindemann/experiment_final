@@ -78,14 +78,18 @@
       <!--  <div class="col"> -->
             <div class="card mb-4 border-0 bg-white text-instructions">
                 <div class="card-body bg-white">
+                <p style="text-align: center">
+                        {{ if player.vote_answ == "yes"  }}
+                      <i>Sie haben sich vorhin gegen eine Punkteumverteilung innerhalb der Gruppe entschieden. </i>
+                        {{ else }}
+                        <i> Da Sie sich weder für oder gegen eine Punkteumverteilung innerhalb der Gruppe entschieden haben,
+                        verbleiben Sie mit der zu Beginn zugeteilten Punkteregelung. </i> {{ endif }}
+                    </p>
 
-
-                    <p> <i>Sie haben sich vorhin gegen eine Punkteumverteilung innerhalb der Gruppe entschieden. </i>
 
                     <p/>
 
-                    <p>
-                        Sie beenden das vierte Spiel mit <b>{{ player.score_task }} {{ if player.score_task == 1 or player.score_task == -1}} Punkt {{ else }} Punkten{{ endif }}</b>. Ihr erster Gegenspieler hat das Spiel mit <b>{{ player.score_task_opp1 }} {{ if player.score_task_opp1 == 1 or player.score_task_opp1 == -1 }}
+                    <p>Sie beenden das vierte Spiel mit <b>{{ player.score_task }} {{ if player.score_task == 1 or player.score_task == -1}} Punkt {{ else }} Punkten{{ endif }}</b>. Ihr erster Gegenspieler hat das Spiel mit <b>{{ player.score_task_opp1 }} {{ if player.score_task_opp1 == 1 or player.score_task_opp1 == -1 }}
                     Punkt {{else }} Punkten{{ endif }} </b>  und Ihr zweiter Gegenspieler mit <b>{{ player.score_task_opp2 }} {{ if player.score_task_opp2 == 1 or player.score_task_opp2 == -1 }}
                     Punkt {{else }} Punkten {{ endif }}</b> abgeschlossen.
                     </p>

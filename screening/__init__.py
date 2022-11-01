@@ -18,10 +18,14 @@ def creating_session(subsession):
     session.num_fin = 0
     session.num_participants_finished_east = 0
     session.num_participants_finished_west = 0
-    session.num_gender_fem = 0
-    session.num_gender_male = 0
-    session.num_yob_1 = 0
-    session.num_yob_2 = 0
+    session.num_finished_female = 0
+    session.num_finished_male = 0
+    session.num_finished_divers = 0
+    session.num_finished_age1829 = 0
+    session.num_finished_age3039 = 0
+    session.num_finished_age4049 = 0
+    session.num_finished_age5059 = 0
+    session.num_finished_age6069 = 0
     session.num_participants_red = 0
     session.num_participants_cap = 0
 
@@ -122,6 +126,8 @@ fed_states = ['Baden-Württemberg','Bayern', 'Berlin', 'Brandenburg', 'Bremen',
               'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']
 
 ex_ddr = ['Mecklenburg-Vorpommern', 'Brandenburg', 'Sachsen-Anhalt', 'Sachsen', 'Thüringen']
+west = ['Baden-Württemberg','Bayern', 'Berlin', 'Bremen', 'Hamburg', 'Hessen', 'Niedersachsen',
+              'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland','Schleswig-Holstein' ]
 
 ## functions
 def make_field_7(label):
@@ -155,20 +161,9 @@ class Player(BasePlayer):
         choices = ['Weiblich', 'Männlich', 'Divers'],
         widget = widgets.RadioSelect
     )
-    yob = models.IntegerField(
+    age = models.IntegerField(
      #   blank = True,
-        label = 'In welchem Jahr sind Sie geboren?',
-    )
-    edu = models.StringField(
-    #    blank = True,
-        label = 'Was ist Ihr höchster Bildungsabschluss, den Sie erhalten haben?',
-        choices = ['Kein oder noch kein Schulabschluss',
-                   'Hochschulabschluss, Volksschulabschluss',
-                   'Mittlere Reife, Realabschluss, Polytechnische Oberschule mit Abschluss 10. Klasse',
-                   'Fachhochschulabschluss, Abitur, erweiterte Oberschule mit Abschluss 12. Klasse',
-                   'Fachhochschul- oder Universitätsabschluss (z.B. Bachelor, Master, Diplom, Staatsexamen)',
-                   'Promotion, Habilitation'],
-        widget = widgets.RadioSelect
+        label = 'Wie alt sind Sie?',
     )
 
     born_de = models.StringField(
@@ -218,9 +213,8 @@ class Player(BasePlayer):
     )
     prime2 = models.StringField(
         blank = True,
-        label = 'Berufliche Perspektiven waren im sozialistischen Deutschland beschränkt. Zum Beispiel, auch wenn man sich im Beruf stark anstrengte und engagierte,'
+        label = 'Berufliche Perspektiven waren in der DDR beschränkt. Zum Beispiel, auch wenn man sich im Beruf stark anstrengte und engagierte,'
                 ' wurde man meistens nicht besser entlohnt als diejenigen, die die Extra-Meile nicht gegangen sind.',
-     #   label = 'Vor der Wende hatten Menschen im Osten Deutschlands weniger persönliche und berufliche Zukunftsaussichten als diejenigen im Westen.',
         widget = widgets.RadioSelect,
         choices=['Stimme überhaupt nicht zu', 'Stimme eher nicht zu', 'Stimme eher zu',
                 'Stimme voll und ganz zu']
@@ -231,8 +225,8 @@ class Player(BasePlayer):
         choices = fed_states
     )
 
-def yob_choices(player):
-    choices = list(range(2004, 1939,-1))
+def age_choices(player):
+    choices = list(range(18, 80))
     return choices
 
 def pollr_choices(player):
@@ -252,6 +246,9 @@ def partyid_choices(player):
 def par_vars(player):
     participant = player.participant
     participant.state_now = player.state_now
+    participant.gender = player.gender
+    participant.age = player.age
+
     print(player.session.num_fin)
 
 
@@ -266,18 +263,16 @@ class Einwilligung(Page):
     form_model = 'player'
     form_fields = ['consent']
 
-class SorryFull(Page):
+
+class SorryConsRedirect(Page):
     def is_displayed(player: Player):
         return player.consent == 0
-
-
 
 
 class P1(Page):
     form_model = 'player'
     form_fields = ['gender',
-                   'yob',
-                   'edu',
+                   'age',
                    'born_de',
                    'born_de_par',
                    'state_now']
@@ -288,12 +283,42 @@ class P1(Page):
     def before_next_page(player, timeout_happened):
         gen_seed(player)
         par_vars(player)
+        print('Female Finished:', player.session.num_finished_female)
 
 
-class SorryFull2(Page):
+class SorrySORedirect(Page):
 
     def is_displayed(player: Player):
-        return player.born_de == 'Nein' or player.born_de_par == 'Nein'
+        return player.born_de == 'Nein' or player.born_de_par == 'Nein' or player.age > 69
+
+
+class SorryFullRedirect(Page):
+
+    def is_displayed(player: Player):
+  #      return (player.gender == 'Männlich' and player.session.num_finished_male >= 1100) or \
+  #             (player.gender == 'Weiblich' and player.session.num_finished_female >= 1100) or \
+  #             (player.gender == 'Divers' and player.session.num_finished_divers >= 4) or \
+  #             ((player.age >= 18 and player.age <= 29) and player.session.num_finished_age1829 >= 396) or\
+  #             ((player.age >= 30 and player.age <= 39) and player.session.num_finished_age3039 >= 391) or \
+  #             ((player.age >= 40 and player.age <= 49) and player.session.num_finished_age4049 >= 358) or \
+  #             ((player.age >= 50 and player.age <= 59) and player.session.num_finished_age5059 >= 569) or \
+  #             ((player.age >= 60 and player.age <= 69)and player.session.num_finished_age6069 >= 486) or \
+  #             (player.state_now in ex_ddr and player.session.num_participants_finished_east >= 1100) or\
+  #             (player.state_now in west and player.session.num_participants_finished_west >= 1100) or\
+  #              player.session.num_fin >= 2200
+
+        return (player.gender == 'Männlich' and player.session.num_finished_male >= 2) or \
+               (player.gender == 'Weiblich' and player.session.num_finished_female >= 2) or \
+               (player.gender == 'Divers' and player.session.num_finished_divers >= 2) or \
+               ((player.age >= 18 and player.age <= 29) and player.session.num_finished_age1829 >= 1) or\
+               ((player.age >= 30 and player.age <= 39) and player.session.num_finished_age3039 >= 1) or \
+               ((player.age >= 40 and player.age <= 49) and player.session.num_finished_age4049 >= 1) or \
+               ((player.age >= 50 and player.age <= 59) and player.session.num_finished_age5059 >= 1) or \
+               ((player.age >= 60 and player.age <= 69)and player.session.num_finished_age6069 >= 1) or \
+               (player.state_now in ex_ddr and player.session.num_participants_finished_east >= 1) or\
+               (player.state_now in west and player.session.num_participants_finished_west >= 1) or\
+                player.session.num_fin >= 8
+
 
 class P6(Page):
     form_model = 'player'
@@ -342,5 +367,5 @@ class P11(Page): # Prime
 
 
 
-page_sequence = [Welcome, Einwilligung,SorryFull,P1,SorryFull2,P6,P7,P8,P9,P10,P11]
+page_sequence = [Welcome, Einwilligung,SorryConsRedirect,P1,SorryFullRedirect,SorrySORedirect,P6,P7,P8,P9,P10,P11]
 

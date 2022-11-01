@@ -120,15 +120,17 @@
             <div class="card mb-4 border-0 bg-white text-instructions">
                 <div class="card-body bg-white">
 
-
-
-                    <p>
+                    <p style="text-align: center">
+                        {{ if player.vote_answ == "yes"  }}
                       <i>  Sie haben sich vorhin für eine Punkteumverteilung innerhalb der Gruppe entschieden.</i>
+                        {{ else }}
+                        <i> Da Sie sich weder für oder gegen eine Punkteumverteilung innerhalb der Gruppe entschieden haben,
+                        verbleiben Sie mit der zu Beginn zugeteilten Punkteregelung. </i> {{ endif }}
                     </p>
 
                      {{ if player.score_task < player.score_task_opp1 and player.score_task < player.score_task_opp2 }}
 
-                    <p> <font color="green">Da Ihre Gegenspieler eine höhere Punktzahl als Sie erzielt haben, kriegen Sie {{ player.red_amount }} Punkte mehr!</font> </p>
+                    <p> <font color="green">Da Ihre Gegenspieler eine höhere Punktzahl als Sie erzielt haben, kriegen Sie {{ player.red_amount }} Punkte mehr!</font></p>
 
                        {{ else }}
 
@@ -139,13 +141,13 @@
                     {{ endif }}
 
 
-                       <b>
-                           <i>
+
+
                                Sie und Ihre Gegenspieler beenden das vierte Spiel mit <b> {{ player.sum_group_third }} Punkten</b>.
                                Ohne die Umverteilung hätten Sie das Spiel mit <b>{{ player.score_task }} {{ if player.score_task != 1 or player.score_task != -1 }} Punkten {{ else }} Punkt {{ endif }}</b> abgeschlossen.
                                Ihr erster Gegenspieler hätte das Spiel mit  <b>{{ player.score_task_opp1 }} {{ if player.score_task_opp1 != 1 or player.score_task_opp1 != -1 }} Punkten {{ else }} Punkt {{ endif }} </b>
                                und Ihr zweiter Gegenspieler mit  <b>{{ player.score_task_opp2}} {{ if player.score_task_opp2 != 1 or player.score_task_opp2 != -1 }} Punkten {{ else }} Punkt {{ endif }}</b> beendet.
-                           </i>
+
 
                      </p>
                     </p>

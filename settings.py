@@ -52,8 +52,8 @@ SESSION_CONFIGS = [
 
 ROOMS = [
     dict(
-        name='umfrage_s1',
-        display_name='Session_Clickworker',
+        name='umfrage_s2',
+        display_name='Session_BilendiRespondi',
      #   participant_label_file='_rooms/econ101.txt',
       #  use_secure_urls=True
     ),
@@ -63,10 +63,11 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ['is_dropout', 'treat','prime','redistribution','better_opp','diff_player_opp', 'num_redi', 'num_capi',
-                      'state_now']
+                      'state_now', 'gender', 'age']
 SESSION_FIELDS = ['params', 'num_participants_finished_east','num_participants_finished_west',
                   'num_finished_female', 'num_finished_male', 'num_finished_divers',
-                  'num_finished_age', 'num_finished_edu', 'num_fin',
+                  'num_finished_age1829', 'num_finished_age3039', 'num_finished_age4049', 'num_finished_age5059',
+                  'num_finished_age6069',  'num_fin',
                   'num_participants_red', 'num_participants_cap']
 
 # ISO-639 code
@@ -84,7 +85,7 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '6593783526314'
-SERVER_URL = 'https://prefstudy-zsomo.ondigitalocean.app/room/umfrage_s1'
+
 
 
 # generating session configs for all varieties of features

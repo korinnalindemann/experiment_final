@@ -57,7 +57,7 @@ class Player(BasePlayer):
     num_correct = models.IntegerField(initial=0)
     num_failed = models.IntegerField(initial=0)
     vote_rules = models.BooleanField(
-    #    blank = True,
+        blank = True,
         label = ' ',
         choices= [[0, 'Ich möchte mit meinen erzielten Punkten verbleiben.'], [1,'Ich möchte, dass alle Punkte gleichmäßig innerhalb der Gruppe verteilt werden.']],
     )
@@ -70,6 +70,7 @@ class Player(BasePlayer):
     red_amount = models.FloatField(initial=0)
     red_amount_opp1 = models.FloatField(initial=0)
     red_amount_opp2 = models.FloatField(initial=0)
+    vote_answ = models.StringField(initial = "")
 
 
 # puzzle-specific stuff
@@ -269,7 +270,6 @@ def get_score(player: Player):
     if (p.score_task >= 13 or p.score_task <= -13):
         perfopp = [0.1, 0.2, 0.3]
 
-
     if participant.better_opp == 1:
         if p.score_task > 0:
             p.score_task_opp1 = ceil(p.score_task + (p.score_task* (random.choice(perfopp))))
@@ -297,26 +297,24 @@ def get_score(player: Player):
             p.score_task_opp2 = ceil(p.score_task - random.choice(perfopp))
 
     print(perfopp)
-
-
     p.sum_group = p.score_task + p.score_task_opp1 + p.score_task_opp2
     p.sum_group_third = round((p.sum_group / 3),1)
 
-
-
-
-
-    ## redistribution variables
-    if p.vote_rules == 1:
+    ## redistribution variable
+    vote_rules = p.field_maybe_none('vote_rules')
+    if vote_rules == 1 or (vote_rules is None and p.participant.redistribution == 1):
         p.red_amount = round(p.sum_group_third - p.score_task, 1)
         p.red_amount_opp1 = round(p.sum_group_third - p.score_task_opp1,1)
         p.red_amount_opp2 = round(p.sum_group_third - p.score_task_opp2,1)
-
-
     else:
         p.red_amount = 0
         p.red_amount_opp1 = 0
         p.red_amount_opp2 = 0
+
+    if vote_rules == 1 or vote_rules == 0:
+        p.vote_answ = 'yes'
+    else:
+        p.vote_answ = 'no'
 
 
 
@@ -333,13 +331,13 @@ class Vote_Red(Page):
 class Instructions1(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return (participant.num_redi == 5000 or participant.num_capi == 5000)
+        return (participant.num_redi == 1 or participant.num_capi == 1)
 
 class Game(Page):
 
     def is_displayed(player: Player):
         participant = player.participant
-        return (participant.num_capi == 5000 or participant.num_redi == 5000)
+        return (participant.num_capi == 1 or participant.num_redi == 1)
 
     timeout_seconds = 30
 
@@ -365,7 +363,7 @@ class Game(Page):
 class Results_Round(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return participant.num_capi == 5000 or participant.num_redi == 5000
+        return participant.num_capi == 1 or participant.num_redi == 1
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -376,19 +374,27 @@ class Results_Round(Page):
 class Results_Cap(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return player.vote_rules == 0 and (participant.num_capi == 5000 or participant.num_redi == 5000)
+        vote_rules = player.field_maybe_none('vote_rules')
+        if vote_rules is None:
+            return participant.redistribution == 0
+        else:
+            return vote_rules == 0 and (participant.num_capi == 1 or participant.num_redi == 1)
 
 
 
 class Results_Red(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return player.vote_rules == 1 and (participant.num_capi == 5000 or participant.num_redi == 5000)
+        vote_rules = player.field_maybe_none('vote_rules')
+        if vote_rules is None:
+            return participant.redistribution == 1
+        else:
+            return vote_rules == 1 and (participant.num_capi == 1 or participant.num_redi == 1)
 
 class NoGame(Page):
     def is_displayed(player: Player):
         participant = player.participant
-        return participant.num_capi != 5000 and participant.num_redi != 5000
+        return participant.num_capi != 1 and participant.num_redi != 1
 
 
 
