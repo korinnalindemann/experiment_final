@@ -295,29 +295,17 @@ class SorrySORedirect(Page):
 class SorryFullRedirect(Page):
 
     def is_displayed(player: Player):
-  #      return (player.gender == 'Männlich' and player.session.num_finished_male >= 1100) or \
-  #             (player.gender == 'Weiblich' and player.session.num_finished_female >= 1100) or \
-  #             (player.gender == 'Divers' and player.session.num_finished_divers >= 4) or \
-  #             ((player.age >= 18 and player.age <= 29) and player.session.num_finished_age1829 >= 396) or\
-  #             ((player.age >= 30 and player.age <= 39) and player.session.num_finished_age3039 >= 391) or \
-  #             ((player.age >= 40 and player.age <= 49) and player.session.num_finished_age4049 >= 358) or \
-  #             ((player.age >= 50 and player.age <= 59) and player.session.num_finished_age5059 >= 569) or \
-  #             ((player.age >= 60 and player.age <= 69)and player.session.num_finished_age6069 >= 486) or \
-  #             (player.state_now in ex_ddr and player.session.num_participants_finished_east >= 1100) or\
-  #             (player.state_now in west and player.session.num_participants_finished_west >= 1100) or\
-  #              player.session.num_fin >= 2200
-
-        return (player.gender == 'Männlich' and player.session.num_finished_male >= 2) or \
-               (player.gender == 'Weiblich' and player.session.num_finished_female >= 2) or \
-               (player.gender == 'Divers' and player.session.num_finished_divers >= 2) or \
-               ((player.age >= 18 and player.age <= 29) and player.session.num_finished_age1829 >= 1) or\
-               ((player.age >= 30 and player.age <= 39) and player.session.num_finished_age3039 >= 1) or \
-               ((player.age >= 40 and player.age <= 49) and player.session.num_finished_age4049 >= 1) or \
-               ((player.age >= 50 and player.age <= 59) and player.session.num_finished_age5059 >= 1) or \
-               ((player.age >= 60 and player.age <= 69)and player.session.num_finished_age6069 >= 1) or \
-               (player.state_now in ex_ddr and player.session.num_participants_finished_east >= 1) or\
-               (player.state_now in west and player.session.num_participants_finished_west >= 1) or\
-                player.session.num_fin >= 8
+        return (player.gender == 'Männlich' and player.session.num_finished_male >= 1100) or \
+               (player.gender == 'Weiblich' and player.session.num_finished_female >= 1100) or \
+               (player.gender == 'Divers' and player.session.num_finished_divers >= 4) or \
+               ((player.age >= 18 and player.age <= 29) and player.session.num_finished_age1829 >= 396) or\
+               ((player.age >= 30 and player.age <= 39) and player.session.num_finished_age3039 >= 391) or \
+               ((player.age >= 40 and player.age <= 49) and player.session.num_finished_age4049 >= 358) or \
+               ((player.age >= 50 and player.age <= 59) and player.session.num_finished_age5059 >= 569) or \
+               ((player.age >= 60 and player.age <= 69)and player.session.num_finished_age6069 >= 486) or \
+               (player.state_now in ex_ddr and player.session.num_participants_finished_east >= 1100) or\
+               (player.state_now in west and player.session.num_participants_finished_west >= 1100) or\
+                player.session.num_fin >= 2200
 
 
 class P6(Page):
