@@ -172,7 +172,7 @@ class Player(BasePlayer):
         widget =  widgets.RadioSelect
     )
     born_de_par = models.StringField(
-        label = 'Sind beide Ihrer Eltern in Deutschland geboren?',
+        label = 'Sind Ihre beiden Elternteile in Deutschland geboren?',
         choices = ['Ja', 'Nein'],
         widget =  widgets.RadioSelect
     )
